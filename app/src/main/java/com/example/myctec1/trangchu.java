@@ -63,6 +63,7 @@ public class trangchu extends AppCompatActivity {
             // chuyển qua giao diện quản lý
                Intent intent = new Intent(trangchu.this, quanly.class);
                startActivity(intent);
+               // thử commit
            }
        });
     }
