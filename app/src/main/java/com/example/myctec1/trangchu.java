@@ -56,6 +56,11 @@ public class trangchu extends AppCompatActivity {
             }
         });
         // nút khác
+       btn_ql.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
 
+           }
+       });
     }
 }
