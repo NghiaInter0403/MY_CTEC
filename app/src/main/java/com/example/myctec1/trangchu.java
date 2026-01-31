@@ -59,6 +59,7 @@ public class trangchu extends AppCompatActivity {
        btn_ql.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+            // chuyển qua giao diện quản lý
 
            }
        });
