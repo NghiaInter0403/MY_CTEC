@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class trangchu extends AppCompatActivity {
 // khai báo biến
-    Button btn_ql,btn_nd,btn_tk,btn_thoat;
+    Button btn_ql,btn_tk,btn_thoat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,6 @@ public class trangchu extends AppCompatActivity {
         });
         // gắn id
         btn_ql=findViewById(R.id.btn_ql);
-        btn_nd=findViewById(R.id.btn_nd);
         btn_tk=findViewById(R.id.btn_tk);
         btn_thoat=findViewById(R.id.btn_thoat);
         // code chuyển hướng cho trang chủ

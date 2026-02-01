@@ -34,8 +34,8 @@
 
     <Button
         android:id="@+id/btn_ql"
-        android:layout_width="328dp"
-        android:layout_height="69dp"
+        android:layout_width="305dp"
+        android:layout_height="76dp"
         android:backgroundTint="#23B828"
         android:text="Quản lý sinh viên"
         android:textSize="20sp"
@@ -44,28 +44,10 @@
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256" />
-
-    <Button
-        android:id="@+id/btn_nd"
-        android:layout_width="328dp"
-        android:layout_height="69dp"
-        android:backgroundTint="#E6790B"
-        android:text="Nhập điểm sinh viên"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:icon="@android:drawable/btn_star"
-        app:iconSize="40dp"
-        app:iconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.409" />
+        app:layout_constraintVertical_bias="0.281" />
 
     <Button
         android:id="@+id/btn_tk"
@@ -81,15 +63,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.574" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_thoat"
         android:layout_width="328dp"
         android:layout_height="69dp"
         android:backgroundTint="#F44336"
-        android:text="Thoát"
+        android:text="Quay về trang đăng nhập"
         android:textSize="20sp"
         android:textStyle="bold"
         app:icon="@android:drawable/ic_dialog_alert"
@@ -99,6 +80,6 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.744" />
+        app:layout_constraintVertical_bias="0.709" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
