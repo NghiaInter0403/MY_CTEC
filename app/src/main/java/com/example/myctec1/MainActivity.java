@@ -80,9 +80,11 @@ public class MainActivity extends AppCompatActivity {
                     "masv TEXT UNIQUE," +
                     "tensv TEXT," +
                     "malop TEXT," +
+                    "makhoa"+
                     "ngaysinh TEXT," +
                     "so_dt TEXT," +
-                    "FOREIGN KEY (malop) REFERENCES lop(malop)" +
+                    "FOREIGN KEY (malop) REFERENCES lop(malop)," +
+                    "FOREIGN KEY (makhoa) REFERENCES khoa(makhoa)" +
                     ")";
             mydata.execSQL(sinhvien);
             // nhập thử 1 giáo viên
