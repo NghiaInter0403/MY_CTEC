@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btn_dn=findViewById(R.id.btn_dn);
         btn_thoat=findViewById(R.id.btn_thoat);
         // tạo cơ sở dữ liệu
-        mydata=openOrCreateDatabase("qlsv.db",MODE_PRIVATE,null);
+        mydata=openOrCreateDatabase("qlsv1.db",MODE_PRIVATE,null);
         // tạo table chứa dữ liệu
         // thông báo nếu đã tồn tại
         try{
@@ -96,6 +96,46 @@ public class MainActivity extends AppCompatActivity {
                     "'0352755926'" +
                     ")";
             mydata.execSQL(nhapgv);
+            // nhập thử 1 giáo viên
+            String nhapkhoa = "INSERT INTO khoa VALUES (" +
+                    "null," +
+                    "cntt"+
+                    "Công nghệ thông tin "+
+                    ")"+
+            "INSERT INTO khoa VALUES (" +
+                    "null," +
+                    "tckt"+
+                    "Tài chính kế toán "+
+                    ")"+
+           "INSERT INTO khoa VALUES (" +
+                    "null," +
+                    "cnts"+
+                    "Công nghệ thủy sản "+
+                    ")";
+            mydata.execSQL(nhapkhoa);
+            // nhập thử 1 giáo viên
+            String nhaplop = "INSERT INTO lop VALUES (" +
+                    "null," +
+                    "hcntt23,"+
+                    "CNTT CLC 23,"+
+                    "cntt,"+
+                    "20,"+
+                    ")"+
+             "INSERT INTO lop VALUES (" +
+                    "null," +
+                    "hcntt24,"+
+                    "CNTT CLC 24,"+
+                    "cntt,"+
+                    "25,"+
+                    ")"+
+             "INSERT INTO lop VALUES (" +
+                    "null," +
+                    "ccntp23,"+
+                    "CNTP 23,"+
+                    "cnts,"+
+                    "50,"+
+                    ")";
+            mydata.execSQL(nhaplop);
 
         }
         catch(Exception e){
