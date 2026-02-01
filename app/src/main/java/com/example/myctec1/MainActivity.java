@@ -85,28 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     "FOREIGN KEY (malop) REFERENCES lop(malop)" +
                     ")";
             mydata.execSQL(sinhvien);
-
-            // ===== BẢNG MÔN =====
-            String mon = "CREATE TABLE IF NOT EXISTS mon (" +
-                    "id_mon INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "mamon TEXT UNIQUE," +
-                    "tenmon TEXT" +
-                    ")";
-            mydata.execSQL(mon);
-
-            // ===== BẢNG ĐIỂM =====
-            String diemso = "CREATE TABLE IF NOT EXISTS diemso (" +
-                    "id_diem INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "masv TEXT," +
-                    "mamon TEXT," +
-                    "diem1 REAL," +
-                    "diem2 REAL," +
-                    "diem3 REAL," +
-                    "diemtb REAL," +
-                    "FOREIGN KEY (masv) REFERENCES sinhvien(masv)," +
-                    "FOREIGN KEY (mamon) REFERENCES mon(mamon)" +
-                    ")";
-            mydata.execSQL(diemso);
             // nhập thử 1 giáo viên
             String nhapgv = "INSERT INTO giaoVien VALUES (" +
                     "null," +
