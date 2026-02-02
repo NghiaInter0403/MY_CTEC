@@ -107,7 +107,7 @@
                     app:layout_constraintVertical_bias="0.329" />
 
                 <ListView
-                    android:id="@+id/btn_moi"
+                    android:id="@+id/lv"
                     android:layout_width="409dp"
                     android:layout_height="208dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -116,7 +116,7 @@
                     app:layout_constraintVertical_bias="0.663" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btn_moi"
                     android:layout_width="101dp"
                     android:layout_height="54dp"
                     android:backgroundTint="#2196F3"
@@ -141,7 +141,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.172"
-                    app:layout_constraintStart_toEndOf="@+id/button"
+                    app:layout_constraintStart_toEndOf="@+id/btn_moi"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.872" />
 
@@ -175,7 +175,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/btn_tc"
                     app:layout_constraintHorizontal_bias="0.166"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_moi"
                     app:layout_constraintVertical_bias="0.466" />
 
                 <Button
