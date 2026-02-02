@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -104,7 +105,17 @@ public class quanly extends AppCompatActivity {
             }
         });
         // nút mới
-
+        btn_moi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt_ma.setText("");
+                edt_ten.setText("");
+                edt_ngay.setText("");
+                edt_sdt.setText("");
+                edt_ma.requestFocus();
+                Toast.makeText(quanly.this, "Đã làm sạch thông tin bạn có thể nhập mới",Toast.LENGTH_SHORT).show();
+            }
+        });
     //--------------------------------- ngăn cách hehe
     }
 }
