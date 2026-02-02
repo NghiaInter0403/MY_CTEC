@@ -1,13 +1,16 @@
 package com.example.myctec1;
 
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -48,6 +51,41 @@ public class quanly extends AppCompatActivity {
         btn_tc = findViewById(R.id.btn_tc);
         // gọi data
         mydata=openOrCreateDatabase("qlsv1.db",MODE_PRIVATE,null);
+        // hàm chọn ngày cô liên gửi
+        edt_ngay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final
+            }
+        });
+        // gán sự kiện vào các nút
+        // gán vô nút trang chủ
+        btn_tc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(quanly.this);
+                builder.setTitle("QUAY VỀ ?");
+                builder.setMessage("Bạn có muốn quay về trang chủ không?");
+
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish(); // thoát chương trình
+                    }
+                });
+
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // quay lại chương trình
+                    }
+                });
+
+                builder.show();
+            }
+        });
+        // nút mới
+
     //--------------------------------- ngăn cách hehe
     }
 }
