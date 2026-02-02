@@ -1,6 +1,11 @@
 package com.example.myctec1;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +14,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class quanly extends AppCompatActivity {
-
+// khai báo biến
+    EditText edt_ma, edt_ten, edt_ngay, edt_sdt;
+    ListView lv;
+    Spinner cbb_khoa, cbb_lop;
+    Button btn_moi, btn_luu, btn_sua, btn_xoa, btn_tc;
+    SQLiteDatabase mydata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +30,24 @@ public class quanly extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        //gan s biến cho giao diện
+        edt_ma=findViewById(R.id.edt_ma);
+        edt_ten=findViewById(R.id.edt_ten);
+        edt_ngay = findViewById(R.id.edt_ngay);
+        edt_sdt = findViewById(R.id.edt_sdt);
+        // spiner
+        cbb_khoa = findViewById(R.id.cbb_khoa);
+        cbb_lop = findViewById(R.id.cbb_lop);
+        // listview
+        lv = findViewById(R.id.lv);
+        // Button
+        btn_moi = findViewById(R.id.btn_moi);
+        btn_luu = findViewById(R.id.btn_luu);
+        btn_sua = findViewById(R.id.btn_sua);
+        btn_xoa = findViewById(R.id.btn_xoa);
+        btn_tc = findViewById(R.id.btn_tc);
+        // gọi data
+        mydata=openOrCreateDatabase("qlsv1.db",MODE_PRIVATE,null);
+    //--------------------------------- ngăn cách hehe
     }
 }
