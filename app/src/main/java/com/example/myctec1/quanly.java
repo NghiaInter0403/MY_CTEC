@@ -1,10 +1,12 @@
 package com.example.myctec1;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -15,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class quanly extends AppCompatActivity {
 // khai báo biến
@@ -55,7 +60,21 @@ public class quanly extends AppCompatActivity {
         edt_ngay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final
+                final Calendar calendar = Calendar.getInstance();
+                int D = calendar.get(Calendar.DAY_OF_MONTH);
+                int M = calendar.get(Calendar.MONTH);
+                int Y = calendar.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(quanly.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        if((Y-i)>18){
+                            calendar.set(i,i1,i2);
+                            edt_ngay.setText(simpleDateFormat.format(calendar.getTime()));
+                        }
+                    }
+                },Y,M,D);
+                datePickerDialog.show();
             }
         });
         // gán sự kiện vào các nút
