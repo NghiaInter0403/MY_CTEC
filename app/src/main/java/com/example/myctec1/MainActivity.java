@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // tạo table chứa dữ liệu
         // thông báo nếu đã tồn tại
         try{
-            String sql = "CREATE TABLE giaovien(" +
+            String sql = "CREATE TABLE IF NOT EXISTS giaovien(" +
                     "id_gv INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "ten_gv TEXT," +
                     "ten_dn TEXT UNIQUE," +
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     "masv TEXT UNIQUE," +
                     "tensv TEXT," +
                     "malop TEXT," +
-                    "makhoa"+
+                    "makhoa,"+
                     "ngaysinh TEXT," +
                     "so_dt TEXT," +
                     "FOREIGN KEY (malop) REFERENCES lop(malop)," +

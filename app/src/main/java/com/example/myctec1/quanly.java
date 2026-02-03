@@ -130,6 +130,7 @@ public class quanly extends AppCompatActivity {
 
                 cbb_lop.setAdapter(adapterLop);
             }
+
 //------------------------------------------------------------------------------
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
