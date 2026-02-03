@@ -116,6 +116,7 @@ public class quanly extends AppCompatActivity {
                 Toast.makeText(quanly.this, "Đã làm sạch thông tin bạn có thể nhập mới",Toast.LENGTH_SHORT).show();
             }
         });
+        // nút lưu
     //--------------------------------- ngăn cách hehe
     }
 }
