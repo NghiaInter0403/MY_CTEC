@@ -98,46 +98,26 @@ public class MainActivity extends AppCompatActivity {
                     "'0352755926'" +
                     ")";
             mydata.execSQL(nhapgv);
-            // nhập thử 1 giáo viên
-            String nhapkhoa = "INSERT INTO khoa VALUES (" +
-                    "null," +
-                    "cntt"+
-                    "Công nghệ thông tin "+
-                    ")"+
-            "INSERT INTO khoa VALUES (" +
-                    "null," +
-                    "tckt"+
-                    "Tài chính kế toán "+
-                    ")"+
-           "INSERT INTO khoa VALUES (" +
-                    "null," +
-                    "cnts"+
-                    "Công nghệ thủy sản "+
-                    ")";
-            mydata.execSQL(nhapkhoa);
-            // nhập thử 1 giáo viên
-            String nhaplop = "INSERT INTO lop VALUES (" +
-                    "null," +
-                    "hcntt23,"+
-                    "CNTT CLC 23,"+
-                    "cntt,"+
-                    "20,"+
-                    ")"+
-             "INSERT INTO lop VALUES (" +
-                    "null," +
-                    "hcntt24,"+
-                    "CNTT CLC 24,"+
-                    "cntt,"+
-                    "25,"+
-                    ")"+
-             "INSERT INTO lop VALUES (" +
-                    "null," +
-                    "ccntp23,"+
-                    "CNTP 23,"+
-                    "cnts,"+
-                    "50,"+
-                    ")";
-            mydata.execSQL(nhaplop);
+            // nhập thử khoa
+            mydata.execSQL(
+                    "INSERT INTO khoa (makhoa, tenkhoa) VALUES ('cntt', 'Công nghệ thông tin')"
+            );
+            mydata.execSQL(
+                    "INSERT INTO khoa (makhoa, tenkhoa) VALUES ('tckt', 'Tài chính kế toán')"
+            );
+            mydata.execSQL(
+                    "INSERT INTO khoa (makhoa, tenkhoa) VALUES ('cnts', 'Công nghệ thủy sản')"
+            );
+            // nhập thử lớp
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('hcntt23', 'CNTT CLC 23', 'cntt', 20)"
+            );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('hcntt24', 'CNTT CLC 24', 'cntt', 25)"
+            );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ccntp23', 'CNTP 23', 'cnts', 50)"
+            );
 
         }
         catch(Exception e){
