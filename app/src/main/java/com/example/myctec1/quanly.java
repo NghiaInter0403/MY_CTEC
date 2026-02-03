@@ -117,6 +117,24 @@ public class quanly extends AppCompatActivity {
             }
         });
         // nút lưu
+        btn_luu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // gán text cho biến
+                String ma = edt_ma.getText().toString().trim();
+                String ten = edt_ten.getText().toString().trim();
+                String ngay = edt_ngay.getText().toString().trim();
+                String sdt = edt_sdt.getText().toString().trim();
+
+                // kiểm tra trống
+                if(ma.isEmpty()||ten.isEmpty()||ngay.isEmpty()||sdt.isEmpty()){
+                   Toast.makeText(quanly.this,"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    // kiểm tra trùng
+                }
+            }
+        });
     //--------------------------------- ngăn cách hehe
     }
 }
