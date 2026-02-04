@@ -312,7 +312,78 @@ public class quanly extends AppCompatActivity {
                 }, 200);
             }
         });
+        // nút sửa
+        btn_sua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String masv = edt_ma.getText().toString().trim();
+                String tensv = edt_ten.getText().toString().trim();
+                String ngaysinh = edt_ngay.getText().toString().trim();
+                String sdt = edt_sdt.getText().toString().trim();
+
+                int viTriKhoa = cbb_khoa.getSelectedItemPosition();
+                int viTriLop = cbb_lop.getSelectedItemPosition();
+
+                if (viTriKhoa == -1 || viTriLop == -1) {
+                    Toast.makeText(quanly.this, "Chưa chọn khoa hoặc lớp", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String makhoa = maKhoaList.get(viTriKhoa);
+                String malop = maLopList.get(viTriLop);
+
+                // kiểm tra trống
+                if (masv.isEmpty() || tensv.isEmpty() || ngaysinh.isEmpty() || sdt.isEmpty()) {
+                    Toast.makeText(quanly.this, "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                SQLiteDatabase db = mydata;
+
+                // kiểm tra tồn tại
+                Cursor cursor = db.rawQuery(
+                        "SELECT masv FROM sinhvien WHERE masv = ?",
+                        new String[]{masv}
+                );
+
+                if (!cursor.moveToFirst()) {
+                    Toast.makeText(quanly.this, "Không tìm thấy sinh viên để sửa", Toast.LENGTH_SHORT).show();
+                    cursor.close();
+                    return;
+                }
+                cursor.close();
+
+                // ===== UPDATE =====
+                ContentValues values = new ContentValues();
+                values.put("tensv", tensv);
+                values.put("makhoa", makhoa);
+                values.put("malop", malop);
+                values.put("ngaysinh", ngaysinh);
+                values.put("so_dt", sdt);
+
+                int row = db.update(
+                        "sinhvien",
+                        values,
+                        "masv = ?",
+                        new String[]{masv}
+                );
+
+                if (row > 0) {
+                    Toast.makeText(quanly.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    loadSinhVien();
+                } else {
+                    Toast.makeText(quanly.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+// nút xóa
+        btn_xoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         //nút tìm
         btn_tim.setOnClickListener(new View.OnClickListener() {
             @Override
