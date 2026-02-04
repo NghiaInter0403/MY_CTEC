@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                     "ten_gv TEXT," +
                     "ten_dn TEXT UNIQUE," +
                     "matkhau TEXT,"+
-
                     "email TEXT," +
                     "dia_chi TEXT," +
                     "so_dt TEXT" +
@@ -87,6 +86,30 @@ public class MainActivity extends AppCompatActivity {
                     "FOREIGN KEY (makhoa) REFERENCES khoa(makhoa)" +
                     ")";
             mydata.execSQL(sinhvien);
+            //ban monhoc
+            String monhoc = "CREATE TABLE IF NOT EXISTS monhoc (" +
+                    "id_mon INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "mamon TEXT UNIQUE," +
+                    "tenmon TEXT," +
+                    "sotinchi INTEGER NOT NULL," +
+                    "namhoc INTEGER NOT NULL," +
+                    "makhoa TEXT," +
+                    "FOREIGN KEY (makhoa) REFERENCES khoa(makhoa))";
+            mydata.execSQL(monhoc);
+            // bản diem
+            String diem = "CREATE TABLE IF NOT EXISTS diem (" +
+                    "id_diem INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "masv TEXT," +
+                    "mamon TEXT," +
+                    "namhoc INTEGER NOT NULL," +
+                    "diem_1 REAL," +
+                    "diem_2 REAL," +
+                    "diem_3 REAL," +
+                    "diem_tb REAL,"+
+                    "FOREIGN KEY (masv) REFERENCES sinhvien(masv)," +
+                    "FOREIGN KEY (mamon) REFERENCES monhoc(mamon)" +
+                    ")";
+            mydata.execSQL(diem);
             // nhập thử 1 giáo viên
             String nhapgv = "INSERT INTO giaoVien VALUES (" +
                     "null," +
@@ -116,10 +139,25 @@ public class MainActivity extends AppCompatActivity {
                     "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('hcntt24', 'CNTT CLC 24', 'cntt', 25)"
             );
             mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('hcntt25', 'CNTT CLC 25', 'cntt', 25)"
+            );
+            mydata.execSQL(
                     "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ccntp23', 'CNTP 23', 'cnts', 50)"
             );
             mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ccntp24', 'CNTP 24', 'cnts', 50)"
+            );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ccntp25', 'CNTP 25', 'cnts', 50)"
+            );
+            mydata.execSQL(
                     "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ctckt23', 'KT 23', 'tckt', 50)"
+            );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ctckt24', 'KT 24', 'tckt', 50)"
+            );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ctckt25', 'KT 25', 'tckt', 50)"
             );
 
         }
