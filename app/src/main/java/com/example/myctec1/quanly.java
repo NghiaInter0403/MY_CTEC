@@ -382,8 +382,56 @@ public class quanly extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String masv = edt_ma.getText().toString().trim();
+
+                if (masv.isEmpty()) {
+                    Toast.makeText(quanly.this, "Vui lòng chọn sinh viên cần xóa", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(quanly.this);
+                builder.setTitle("XÁC NHẬN XÓA");
+                builder.setMessage("Bạn có chắc chắn muốn xóa sinh viên này không?");
+
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        SQLiteDatabase db = mydata;
+
+                        int row = db.delete(
+                                "sinhvien",
+                                "masv = ?",
+                                new String[]{masv}
+                        );
+
+                        if (row > 0) {
+                            Toast.makeText(quanly.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
+                            // làm sạch form
+                            edt_ma.setText("");
+                            edt_ten.setText("");
+                            edt_ngay.setText("");
+                            edt_sdt.setText("");
+
+                            loadSinhVien();
+                        } else {
+                            Toast.makeText(quanly.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
             }
         });
+
         //nút tìm
         btn_tim.setOnClickListener(new View.OnClickListener() {
             @Override
