@@ -274,6 +274,46 @@ public class quanly extends AppCompatActivity {
 
             }
         });
+        // nhấn vô listview thì hiển thị thông tin đó lên các ô nhập liệu
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String dong = dsSinhVien.get(position);
+
+                // tách dữ liệu
+                String[] data = dong.split(" - ");
+
+                String masv = data[0];
+                String tensv = data[1];
+                String malop = data[2];
+                String makhoa = data[3];
+                String ngaysinh = data[4];
+                String sdt = data[5];
+
+                // đổ lên EditText
+                edt_ma.setText(masv);
+                edt_ten.setText(tensv);
+                edt_ngay.setText(ngaysinh);
+                edt_sdt.setText(sdt);
+
+                // set Spinner khoa
+                int indexKhoa = maKhoaList.indexOf(makhoa);
+                if (indexKhoa != -1) {
+                    cbb_khoa.setSelection(indexKhoa);
+                }
+
+                // ⚠️ spinner lớp phải đợi load xong
+                cbb_khoa.postDelayed(() -> {
+                    int indexLop = maLopList.indexOf(malop);
+                    if (indexLop != -1) {
+                        cbb_lop.setSelection(indexLop);
+                    }
+                }, 200);
+            }
+        });
+
+        //nút tìm
         btn_tim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
