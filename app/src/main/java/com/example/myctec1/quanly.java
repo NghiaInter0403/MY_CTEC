@@ -60,7 +60,38 @@ public class quanly extends AppCompatActivity {
         c.close();
         adapterSV.notifyDataSetChanged();
     }
+    private void timSinhVienTheoMa(String masv) {
+
+        dsSinhVien.clear();
+
+        Cursor c = mydata.rawQuery(
+                "SELECT masv, tensv, malop, makhoa, ngaysinh, so_dt FROM sinhvien WHERE masv = ?",
+                new String[]{masv}
+        );
+
+        if (c.moveToFirst()) {
+            do {
+                String dong =
+                        c.getString(0) + " - " +
+                                c.getString(1) + " - " +
+                                c.getString(2) + " - " +
+                                c.getString(3) + " - " +
+                                c.getString(4) + " - " +
+                                c.getString(5);
+
+                dsSinhVien.add(dong);
+            } while (c.moveToNext());
+        } else {
+            Toast.makeText(this, "Không tìm thấy sinh viên", Toast.LENGTH_SHORT).show();
+        }
+
+        c.close();
+        adapterSV.notifyDataSetChanged();
+    }
+
+
 //-===========================
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +249,7 @@ public class quanly extends AppCompatActivity {
                 edt_ngay.setText("");
                 edt_sdt.setText("");
                 edt_ma.requestFocus();
+                loadSinhVien();
                 Toast.makeText(quanly.this, "Đã làm sạch thông tin bạn có thể nhập mới",Toast.LENGTH_SHORT).show();
             }
         });
@@ -433,15 +465,45 @@ public class quanly extends AppCompatActivity {
         });
 
         //nút tìm
+
         btn_tim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // DIALOG TÌM KIẾM
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(quanly.this);
+                builder.setTitle("Tìm sinh viên");
 
-                }
+                final EditText edtTim = new EditText(quanly.this);
+                edtTim.setHint("Nhập mã sinh viên");
+                builder.setView(edtTim);
+
+                builder.setPositiveButton("Tìm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String masv = edtTim.getText().toString().trim();
+
+                        if (masv.isEmpty()) {
+                            Toast.makeText(quanly.this, "Chưa nhập mã sinh viên", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        timSinhVienTheoMa(masv);
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
         });
-    //--------------------------------- ngăn cách hehe
+
+        //--------------------------------- ngăn cách hehe
     }
 
 }
