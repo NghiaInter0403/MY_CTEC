@@ -1,6 +1,7 @@
 package com.example.myctec1;
 
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,8 +32,35 @@ public class quanly extends AppCompatActivity {
     EditText edt_ma, edt_ten, edt_ngay, edt_sdt;
     ListView lv;
     Spinner cbb_khoa, cbb_lop;
-    Button btn_moi, btn_luu, btn_sua, btn_xoa, btn_tc;
+    Button btn_moi, btn_luu, btn_sua, btn_xoa, btn_tc,btn_tim;
     SQLiteDatabase mydata;
+    ArrayList<String> maLopList = new ArrayList<>();
+    ArrayList<String> dsSinhVien = new ArrayList<>();
+    ArrayAdapter<String> adapterSV;
+    // haàm load lên list view
+    private void loadSinhVien() {
+        dsSinhVien.clear();
+
+        Cursor c = mydata.rawQuery(
+                "SELECT masv, tensv, malop, makhoa, ngaysinh, so_dt FROM sinhvien",
+                null
+        );
+
+        while (c.moveToNext()) {
+            String dong =
+                    c.getString(0) + " - " +
+                            c.getString(1) + " - " +
+                            c.getString(2) + " - " +
+                            c.getString(3) + " - " +
+                            c.getString(4) + " - " +
+                            c.getString(5);
+            dsSinhVien.add(dong);
+        }
+
+        c.close();
+        adapterSV.notifyDataSetChanged();
+    }
+//-===========================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +70,9 @@ public class quanly extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
         });
+
         //gan s biến cho giao diện
         edt_ma=findViewById(R.id.edt_ma);
         edt_ten=findViewById(R.id.edt_ten);
@@ -59,8 +89,17 @@ public class quanly extends AppCompatActivity {
         btn_sua = findViewById(R.id.btn_sua);
         btn_xoa = findViewById(R.id.btn_xoa);
         btn_tc = findViewById(R.id.btn_tc);
+        btn_tim=findViewById(R.id.btn_tim);
+        // khởi tạo list view
+        adapterSV = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                dsSinhVien
+        );
+        lv.setAdapter(adapterSV);
         // gọi data
         mydata=openOrCreateDatabase("qlsv1.db",MODE_PRIVATE,null);
+        loadSinhVien();
         // hàm chọn ngày cô liên gửi
         edt_ngay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +121,7 @@ public class quanly extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         // gán cho spiner mà quen gọi cbb hehe
         // load dữ liệu cho cbb khoa
 
@@ -111,30 +151,38 @@ public class quanly extends AppCompatActivity {
             }
             //load lớp theo mã khoa
             private void loadLop(String makhoa) {
+
                 ArrayList<String> tenLopList = new ArrayList<>();
+                maLopList.clear(); // QUAN TRỌNG
 
                 Cursor c = mydata.rawQuery(
-                        "SELECT tenlop FROM lop WHERE makhoa = ?",
+                        "SELECT malop, tenlop FROM lop WHERE makhoa = ?",
                         new String[]{makhoa}
                 );
 
                 while (c.moveToNext()) {
-                    tenLopList.add(c.getString(0));
+                    maLopList.add(c.getString(0));   // mã lớp
+                    tenLopList.add(c.getString(1));  // tên lớp
                 }
                 c.close();
 
                 ArrayAdapter<String> adapterLop =
-                        new ArrayAdapter<>(quanly.this, android.R.layout.simple_spinner_item, tenLopList);
+                        new ArrayAdapter<>(quanly.this,
+                                android.R.layout.simple_spinner_item, tenLopList);
                 adapterLop.setDropDownViewResource(
                         android.R.layout.simple_spinner_dropdown_item);
 
                 cbb_lop.setAdapter(adapterLop);
             }
+            // ===== HÀM LOAD DỮ LIỆU LÊN LISTVIEW =====
+
 
 //------------------------------------------------------------------------------
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+
         // gán sự kiện vào các nút
         // gán vô nút trang chủ
         btn_tc.setOnClickListener(new View.OnClickListener() {
@@ -177,21 +225,64 @@ public class quanly extends AppCompatActivity {
         btn_luu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // gán text cho biến
-                String ma = edt_ma.getText().toString().trim();
-                String ten = edt_ten.getText().toString().trim();
-                String ngay = edt_ngay.getText().toString().trim();
+                String masv = edt_ma.getText().toString().trim();
+                String tensv = edt_ten.getText().toString().trim();
+                String ngaysinh = edt_ngay.getText().toString().trim();
                 String sdt = edt_sdt.getText().toString().trim();
+                int viTriKhoa = cbb_khoa.getSelectedItemPosition();
+                int viTriLop = cbb_lop.getSelectedItemPosition();
+
+                String makhoa = maKhoaList.get(viTriKhoa);
+                String malop = maLopList.get(viTriLop);
 
                 // kiểm tra trống
-                if(ma.isEmpty()||ten.isEmpty()||ngay.isEmpty()||sdt.isEmpty()){
+                if(masv.isEmpty()||tensv.isEmpty()||ngaysinh.isEmpty()||sdt.isEmpty()){
                    Toast.makeText(quanly.this,"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    // kiểm tra trùng
+                else {
+                    SQLiteDatabase db = mydata;
+
+                    Cursor cursor = db.rawQuery(
+                            "SELECT masv FROM sinhvien WHERE masv = ?",
+                            new String[]{masv}
+                    );
+
+                    if (cursor.getCount() > 0) {
+                        edt_ma.setError("Mã sinh viên đã tồn tại");
+                        edt_ma.requestFocus();
+                    } else {
+                        ContentValues values = new ContentValues();
+                        values.put("masv", masv);
+                        values.put("tensv", tensv);
+                        values.put("makhoa", makhoa);
+                        values.put("malop", malop);
+                        values.put("ngaysinh", ngaysinh);
+                        values.put("so_dt", sdt);
+
+                        db.insert("sinhvien", null, values);
+
+                        Toast.makeText(quanly.this,
+                                "Lưu thành công", Toast.LENGTH_SHORT).show();
+
+                        loadSinhVien();
+                    }
+
+                    cursor.close();
                 }
+
             }
+        });
+        btn_tim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // DIALOG TÌM KIẾM
+
+
+                }
         });
     //--------------------------------- ngăn cách hehe
     }
+
 }

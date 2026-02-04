@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             mydata.execSQL(
                     "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ccntp23', 'CNTP 23', 'cnts', 50)"
             );
+            mydata.execSQL(
+                    "INSERT INTO lop (malop, tenlop, makhoa, siso) VALUES ('ctckt23', 'KT 23', 'tckt', 50)"
+            );
 
         }
         catch(Exception e){

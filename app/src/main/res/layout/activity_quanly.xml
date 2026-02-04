@@ -146,6 +146,21 @@
                     app:layout_constraintVertical_bias="0.872" />
 
                 <Button
+                    android:id="@+id/btn_tim"
+                    android:layout_width="109dp"
+                    android:layout_height="61dp"
+                    android:backgroundTint="#009688"
+                    android:text="Tìm kím"
+                    android:textStyle="bold"
+                    app:icon="@android:drawable/ic_search_category_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.183"
+                    app:layout_constraintStart_toEndOf="@+id/btn_moi"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.976" />
+
+                <Button
                     android:id="@+id/btn_sua"
                     android:layout_width="114dp"
                     android:layout_height="51dp"
@@ -164,8 +179,8 @@
 
                 <Button
                     android:id="@+id/btn_xoa"
-                    android:layout_width="140dp"
-                    android:layout_height="56dp"
+                    android:layout_width="111dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="16dp"
                     android:backgroundTint="#D31111"
                     android:text="Xóa"
@@ -173,15 +188,15 @@
                     app:icon="@android:drawable/ic_input_delete"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btn_tc"
-                    app:layout_constraintHorizontal_bias="0.166"
+                    app:layout_constraintHorizontal_bias="0.048"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_moi"
-                    app:layout_constraintVertical_bias="0.466" />
+                    app:layout_constraintVertical_bias="0.36" />
 
                 <Button
                     android:id="@+id/btn_tc"
-                    android:layout_width="151dp"
-                    android:layout_height="56dp"
+                    android:layout_width="116dp"
+                    android:layout_height="55dp"
                     android:layout_marginEnd="16dp"
                     android:backgroundTint="#9C27B0"
                     android:text="Trang chủ"
@@ -189,10 +204,10 @@
                     app:icon="?attr/actionModeSelectAllDrawable"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.722"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/btn_luu"
                     app:layout_constraintTop_toBottomOf="@+id/btn_sua"
-                    app:layout_constraintVertical_bias="0.409" />
+                    app:layout_constraintVertical_bias="0.36" />
 
                 <TextView
                     android:id="@+id/textView6"
