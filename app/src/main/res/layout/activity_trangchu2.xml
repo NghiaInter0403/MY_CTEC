@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.663" />
 
     <Button
-        android:id="@+id/btn_tk2"
+        android:id="@+id/btn_mon"
         android:layout_width="330dp"
         android:layout_height="76dp"
         android:backgroundTint="#E91E63"
@@ -84,7 +84,7 @@
         app:layout_constraintVertical_bias="0.411" />
 
     <Button
-        android:id="@+id/btn_tk3"
+        android:id="@+id/btn_diem"
         android:layout_width="325dp"
         android:layout_height="78dp"
         android:backgroundTint="#FF9800"

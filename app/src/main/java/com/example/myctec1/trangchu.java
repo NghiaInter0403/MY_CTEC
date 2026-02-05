@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class trangchu extends AppCompatActivity {
 // khai báo biến
-    Button btn_ql,btn_tk,btn_thoat;
+    Button btn_ql,btn_tk,btn_thoat,btn_mon,btn_diem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,8 @@ public class trangchu extends AppCompatActivity {
         btn_ql=findViewById(R.id.btn_ql);
         btn_tk=findViewById(R.id.btn_tk);
         btn_thoat=findViewById(R.id.btn_thoat);
+        btn_mon = findViewById(R.id.btn_mon);
+        btn_diem = findViewById(R.id.btn_diem);
         // code chuyển hướng cho trang chủ
         btn_thoat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,14 @@ public class trangchu extends AppCompatActivity {
                 });
 
                 builder.show();
+            }
+        });
+        // nút ql môn
+        btn_mon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchu.this, qlmon.class);
+                startActivity(intent);
             }
         });
         // nút khác
