@@ -65,6 +65,22 @@ public class trangchu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // nút quản lý diẻm
+        btn_diem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchu.this, qldiem.class);
+                startActivity(intent);
+            }
+        });
+        // nút thống kê
+        btn_tk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangchu.this, thongke.class);
+                startActivity(intent);
+            }
+        });
         // nút khác
        btn_ql.setOnClickListener(new View.OnClickListener() {
            @Override
