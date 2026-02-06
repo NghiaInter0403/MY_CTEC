@@ -7,4 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".qldiem">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        app:srcCompat="@drawable/screenshot_2026_01_31_220755" />
 </androidx.constraintlayout.widget.ConstraintLayout>
