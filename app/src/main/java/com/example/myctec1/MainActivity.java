@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
             // bản diem
             String diem = "CREATE TABLE IF NOT EXISTS diem (" +
                     "id_diem INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "masv TEXT," +
-                    "mamon TEXT," +
+                    "masv TEXT PRIMARY KEY," +
+                    "mamon TEXT PRIMARY KEY," +
                     "namhoc INTEGER NOT NULL," +
                     "diem_1 REAL," +
                     "diem_2 REAL," +
