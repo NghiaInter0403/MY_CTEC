@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,9 @@ Button btn_moi1, btn_luu1, btn_sua1, btn_xoa1, btn_quaylai;
 ListView lv1;
     ArrayList<String> dsMon = new ArrayList<>();
     ArrayAdapter<String> adapterMon;
+
 SQLiteDatabase mydata;
-    private void loadSinhVien() {
+    private void loadMon() {
         dsMon.clear();
 
         Cursor c = mydata.rawQuery(
@@ -78,6 +80,27 @@ SQLiteDatabase mydata;
         );
         lv1.setAdapter(adapterMon);
         mydata=openOrCreateDatabase("qlsv1.db",MODE_PRIVATE,null);
+        // spiner chọn khoa
+        // gán cho spiner mà quen gọi cbb hehe
+        // load dữ liệu cho cbb khoa
+
+        ArrayList<String> tenKhoaList = new ArrayList<>();
+        ArrayList<String> maKhoaList = new ArrayList<>();
+
+        Cursor c = mydata.rawQuery("SELECT makhoa, tenkhoa FROM khoa", null);
+        while (c.moveToNext()) {
+            maKhoaList.add(c.getString(0));
+            tenKhoaList.add(c.getString(1));
+        }
+        c.close();
+
+        ArrayAdapter<String> adapterKhoa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tenKhoaList);
+
+        adapterKhoa.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+
+        cbb_monkhoa.setAdapter(adapterKhoa);
+
 // nút mới
         btn_moi1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +110,10 @@ SQLiteDatabase mydata;
                 edt_tin.setText("");
                 edt_nam.setText("");
                 edt_mamon.requestFocus();
+                loadMon();
+                Toast.makeText(qlmon.this, "Đã làm sạch thông tin bạn có thể nhập mới",Toast.LENGTH_SHORT).show();
             }
         });
+        // nút lưu
     }
 }
