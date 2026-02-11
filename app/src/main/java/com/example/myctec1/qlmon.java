@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -181,6 +182,88 @@ SQLiteDatabase mydata;
                         loadMon();
                     }
                     cursor.close();
+                }
+            }
+        });
+        // nhấn vô list view nó hiện thông tin lên ô nhập
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String dong = dsMon.get(position);
+
+                // tách dữ liệu
+                String[] data = dong.split(" - ");
+
+                String mamon = data[0];
+                String tenmon = data[1];
+                String tinchi = data[2];
+                String nam = data[3];
+                String khoa = data[4];
+
+                // đổ lên EditText
+                edt_mamon.setText(mamon);
+                edt_tenmon.setText(tenmon);
+                edt_tin.setText(tinchi);
+                edt_nam.setText(nam);
+                // set Spinner khoa
+                int indexKhoa = maKhoaList.indexOf(khoa);
+                if (indexKhoa != -1) {
+                    cbb_monkhoa.setSelection(indexKhoa);
+                }
+            }
+        });
+        // nút sửa
+        btn_sua1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String mamon = edt_mamon.getText().toString().trim();
+                String tenmon = edt_tenmon.getText().toString().trim();
+                String tinchi = edt_tin.getText().toString().trim();
+                String nam = edt_nam.getText().toString().trim();
+                int viTriKhoa = cbb_monkhoa.getSelectedItemPosition();
+                if (viTriKhoa == -1) {
+                    Toast.makeText(qlmon.this, "Chưa chọn khoa hoặc lớp", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String makhoa = maKhoaList.get(viTriKhoa);
+                // kiểm tra trống
+                if (mamon.isEmpty() || tenmon.isEmpty() || tinchi.isEmpty() || nam.isEmpty()) {
+                    Toast.makeText(qlmon.this, "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                SQLiteDatabase db = mydata;
+                // kiểm tra tồn tại
+                Cursor cursor = db.rawQuery(
+                        "SELECT mamon FROM monhoc WHERE mamon = ?",
+                        new String[]{mamon}
+                );
+
+                if (!cursor.moveToFirst()) {
+                    Toast.makeText(qlmon.this, "Không tìm thấy môn để sửa", Toast.LENGTH_SHORT).show();
+                    cursor.close();
+                    return;
+                }
+                cursor.close();
+
+                // ===== UPDATE =====
+                ContentValues values = new ContentValues();
+                values.put("tensv", tenmon);
+                values.put("sotinchi",tinchi);
+                values.put("namhoc",nam);
+                values.put("makhoa",makhoa);
+                int row = db.update(
+                        "monhoc",
+                        values,
+                        "mamon = ?",
+                        new String[]{mamon}
+                );
+
+                if (row > 0) {
+                    Toast.makeText(qlmon.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    loadMon();
+                } else {
+                    Toast.makeText(qlmon.this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });
