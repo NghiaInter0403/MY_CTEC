@@ -113,7 +113,7 @@ public class quanly extends AppCompatActivity {
         cbb_khoa = findViewById(R.id.cbb_khoa);
         cbb_lop = findViewById(R.id.cbb_lop);
         // listview
-        lv = findViewById(R.id.lv);
+        lv = findViewById(R.id.lv1);
         // Button
         btn_moi = findViewById(R.id.btn_moi);
         btn_luu = findViewById(R.id.btn_luu);
