@@ -1,5 +1,7 @@
 package com.example.myctec1;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -114,6 +117,72 @@ SQLiteDatabase mydata;
                 Toast.makeText(qlmon.this, "Đã làm sạch thông tin bạn có thể nhập mới",Toast.LENGTH_SHORT).show();
             }
         });
+        // nút quay về
+        btn_quaylai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(qlmon.this);
+                    builder.setTitle("QUAY VỀ ?");
+                    builder.setMessage("Bạn có muốn quay về trang chủ không?");
+
+                    builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish(); // thoát chương trình
+                        }
+                    });
+
+                    builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss(); // quay lại chương trình
+                        }
+                    });
+
+                    builder.show();
+                }
+        });
         // nút lưu
+        btn_luu1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // gán giá trị cho biến
+                String mamon = edt_mamon.getText().toString().trim();
+                String tenmon = edt_tenmon.getText().toString().trim();
+                String tinchi = edt_tin.getText().toString().trim();
+                String nam = edt_nam.getText().toString().trim();
+                int vitriKhoa = cbb_monkhoa.getSelectedItemPosition();
+                String khoa = maKhoaList.get(vitriKhoa);
+                if (mamon.isEmpty() || tenmon.isEmpty() || tinchi.isEmpty() || nam.isEmpty() || khoa.isEmpty()) {
+                    Toast.makeText(qlmon.this, "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
+                } else {
+                    SQLiteDatabase db = mydata;
+
+                    Cursor cursor = db.rawQuery(
+                            "SELECT mamon FROM monhoc WHERE mamon = ?",
+                            new String[]{mamon}
+                    );
+
+                    if (cursor.getCount() > 0) {
+                        edt_mamon.setError("Mã sinh viên đã tồn tại");
+                        edt_mamon.requestFocus();
+                    } else {
+                        ContentValues values = new ContentValues();
+                        values.put("mamon", mamon);
+                        values.put("tenmon", tenmon);
+                        values.put("sotinchi",tinchi);
+                        values.put("namhoc",nam);
+                        values.put("makhoa",khoa);
+                        db.insert("monhoc", null, values);
+
+                        Toast.makeText(qlmon.this,
+                                "Lưu thành công", Toast.LENGTH_SHORT).show();
+
+                        loadMon();
+                    }
+                    cursor.close();
+                }
+            }
+        });
     }
 }
