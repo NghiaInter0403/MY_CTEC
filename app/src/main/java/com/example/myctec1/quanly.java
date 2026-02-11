@@ -32,7 +32,7 @@ public class quanly extends AppCompatActivity {
     EditText edt_ma, edt_ten, edt_ngay, edt_sdt;
     ListView lv;
     Spinner cbb_khoa, cbb_lop;
-    Button btn_moi, btn_luu, btn_sua, btn_xoa, btn_tc,btn_tim;
+    Button btn_moi, btn_luu, btn_sua, btn_xoa, btn_tc,btn_tim, btn_nhapd;
     SQLiteDatabase mydata;
     ArrayList<String> maLopList = new ArrayList<>();
     ArrayList<String> dsSinhVien = new ArrayList<>();
@@ -121,6 +121,7 @@ public class quanly extends AppCompatActivity {
         btn_xoa = findViewById(R.id.btn_xoa);
         btn_tc = findViewById(R.id.btn_tc);
         btn_tim=findViewById(R.id.btn_tim);
+        btn_nhapd = findViewById(R.id.btn_nhapd);
         // khởi tạo list view
         adapterSV = new ArrayAdapter<>(
                 this,
