@@ -248,7 +248,7 @@ SQLiteDatabase mydata;
 
                 // ===== UPDATE =====
                 ContentValues values = new ContentValues();
-                values.put("tensv", tenmon);
+                values.put("tenmon", tenmon);
                 values.put("sotinchi",tinchi);
                 values.put("namhoc",nam);
                 values.put("makhoa",makhoa);
@@ -267,5 +267,60 @@ SQLiteDatabase mydata;
                 }
             }
         });
+        // nút xóa
+        btn_xoa1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String mamon = edt_mamon.getText().toString().trim();
+
+                if (mamon.isEmpty()) {
+                    Toast.makeText(qlmon.this, "Vui lòng chọn sinh viên cần xóa", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(qlmon.this);
+                builder.setTitle("XÁC NHẬN XÓA");
+                builder.setMessage("Bạn có chắc chắn muốn xóa môn này không?");
+
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        SQLiteDatabase db = mydata;
+
+                        int row = db.delete(
+                                "monhoc",
+                                "mamon = ?",
+                                new String[]{mamon}
+                        );
+
+                        if (row > 0) {
+                            Toast.makeText(qlmon.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+
+                            // làm sạch form
+                            edt_mamon.setText("");
+                            edt_tenmon.setText("");
+                            edt_tin.setText("");
+                            edt_nam.setText("");
+
+                            loadMon();
+                        } else {
+                            Toast.makeText(qlmon.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
     }
 }
