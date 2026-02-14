@@ -1,6 +1,7 @@
 package com.example.myctec1;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,12 +14,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class qldiem extends AppCompatActivity {
 TextView tv_dtb;
 EditText edt_diem1,edt_diem2,edt_diem3;
 Spinner cbb_dkhoa, cbb_dlop, cbb_dsv, cbb_dmon, cbb_dnam;
 Button btn_dmoi, btn_dluu, btn_dsua, btn_dxoa, btn_dtrove;
 ListView lv2;
+    ArrayList<String> dsKhoa = new ArrayList<>();
+    ArrayAdapter<String> adapterKhoa;
+    ArrayList<String> dsLop = new ArrayList<>();
+    ArrayAdapter<String> adapterLop;
+    ArrayList<String> dsSv = new ArrayList<>();
+    ArrayAdapter<String> adapterSv;
+    ArrayList<String> dsMon = new ArrayList<>();
+    ArrayAdapter<String> adapterMon;
+    ArrayList<String> dsNam = new ArrayList<>();
+    ArrayAdapter<String> adapterNam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,5 +57,6 @@ ListView lv2;
         btn_dsua = findViewById(R.id.btn_dsua);
         btn_dxoa = findViewById(R.id.btn_dxoa);
         btn_dtrove = findViewById(R.id.btn_dtrove);
+        lv2 = findViewById(R.id.lv2);
     }
 }
