@@ -32,6 +32,8 @@ ListView lv2;
     ArrayAdapter<String> adapterMon;
     ArrayList<String> dsNam = new ArrayList<>();
     ArrayAdapter<String> adapterNam;
+    ArrayList<String> dsDiem = new ArrayList<>();
+    ArrayAdapter<String> adapterDiem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
