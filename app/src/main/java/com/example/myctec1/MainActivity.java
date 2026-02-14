@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                     "diem_3 REAL," +
                     "diem_tb REAL,"+
                     "FOREIGN KEY (masv) REFERENCES sinhvien(masv)," +
-                    "FOREIGN KEY (mamon) REFERENCES monhoc(mamon)" +
+                    "FOREIGN KEY (mamon) REFERENCES monhoc(mamon)," +
+                    "FOREIGN KEY (namhoc) REFERENCES monhoc(namhoc)" +
                     ")";
             mydata.execSQL(diem);
             // nhập thử 1 giáo viên
