@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -157,6 +159,28 @@ private void loadNam(String mamon) {
 
     cbb_dnam.setAdapter(adapterNam);
 }
+// tính điểm trung bình
+private void tinhDiemTrungBinh() {
+    String d1 = edt_diem1.getText().toString().trim();
+    String d2 = edt_diem2.getText().toString().trim();
+    String d3 = edt_diem3.getText().toString().trim();
+
+    if (!d1.isEmpty() && !d2.isEmpty() && !d3.isEmpty()) {
+        try {
+            double diem1 = Double.parseDouble(d1);
+            double diem2 = Double.parseDouble(d2);
+            double diem3 = Double.parseDouble(d3);
+
+            double dtb = (diem1 + diem2 + (diem3 * 2)) / 4;
+
+            tv_dtb.setText(String.format("%.2f", dtb));
+        } catch (NumberFormatException e) {
+            tv_dtb.setText("");
+        }
+    } else {
+        tv_dtb.setText("");
+    }
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,6 +224,22 @@ private void loadNam(String mamon) {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tinhDiemTrungBinh();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        };
+
+        edt_diem1.addTextChangedListener(watcher);
+        edt_diem2.addTextChangedListener(watcher);
+        edt_diem3.addTextChangedListener(watcher);
 
         cbb_dlop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -260,5 +300,9 @@ private void loadNam(String mamon) {
                 Toast.makeText(qldiem.this, "Đã làm sạch thông tin có thể nhập mới", Toast.LENGTH_SHORT).show();
             }
         });
+        // hiển thị điểm trung bình khi nhập điểm
+
+        // nút lưu
+
     }
 }
