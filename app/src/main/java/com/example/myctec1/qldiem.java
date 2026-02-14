@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -247,6 +248,16 @@ private void loadNam(String mamon) {
                 });
 
                 builder.show();
+            }
+        });
+        btn_dmoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edt_diem1.setText("");
+                edt_diem2.setText("");
+                edt_diem3.setText("");
+                tv_dtb.setText("0");
+                Toast.makeText(qldiem.this, "Đã làm sạch thông tin có thể nhập mới", Toast.LENGTH_SHORT).show();
             }
         });
     }
