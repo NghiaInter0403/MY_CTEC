@@ -103,8 +103,10 @@ private ArrayList<String> maSvList = new ArrayList<>();
                 new String[]{malop});
 
         while (c.moveToNext()) {
-            maSvList.add(c.getString(0));
-            dsSv.add(c.getString(1));
+            String masv = c.getString(0);
+            String tensv = c.getString(1);
+            maSvList.add(masv);
+            dsSv.add(masv + " - " + tensv);
         }
         c.close();
 
@@ -123,12 +125,15 @@ private ArrayList<String> maMonList = new ArrayList<>();
         maMonList.clear();
 
         Cursor c = mydata.rawQuery(
-                "SELECT mamon, tenmon FROM monhoc WHERE makhoa = ?",
+                "SELECT mamon, tenmon, namhoc FROM monhoc WHERE makhoa = ?",
                 new String[]{makhoa});
 
         while (c.moveToNext()) {
-            maMonList.add(c.getString(0));
-            dsMon.add(c.getString(1));
+            String mamon = c.getString(0);
+            String tenmon = c.getString(1);
+            String namhoc = c.getString(2);
+            maMonList.add(mamon);
+            dsMon.add(mamon + " - " + tenmon + "-"+ namhoc);
         }
         c.close();
 
