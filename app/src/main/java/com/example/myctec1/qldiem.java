@@ -305,9 +305,14 @@ private void tinhDiemTrungBinh() {
                 Toast.makeText(qldiem.this, "Đã làm sạch thông tin có thể nhập mới", Toast.LENGTH_SHORT).show();
             }
         });
-        // hiển thị điểm trung bình khi nhập điểm
+
 
         // nút lưu
+        btn_dluu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
     }
 }

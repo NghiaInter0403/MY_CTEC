@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     "masv TEXT UNIQUE," +
                     "tensv TEXT," +
                     "malop TEXT," +
-                    "makhoa,"+
+                    "makhoa TEXT,"+
                     "ngaysinh TEXT," +
                     "so_dt TEXT," +
                     "FOREIGN KEY (malop) REFERENCES lop(malop)," +
@@ -99,20 +99,21 @@ public class MainActivity extends AppCompatActivity {
             // bản diem
             String diem = "CREATE TABLE IF NOT EXISTS diem (" +
                     "id_diem INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "masv TEXT PRIMARY KEY," +
-                    "mamon TEXT PRIMARY KEY," +
+                    "masv TEXT ," +
+                    "mamon TEXT ," +
                     "namhoc INTEGER NOT NULL," +
                     "diem_1 REAL," +
                     "diem_2 REAL," +
                     "diem_3 REAL," +
                     "diem_tb REAL,"+
+                    "UNIQUE (masv,mamon),"+
                     "FOREIGN KEY (masv) REFERENCES sinhvien(masv)," +
                     "FOREIGN KEY (mamon) REFERENCES monhoc(mamon)," +
                     "FOREIGN KEY (namhoc) REFERENCES monhoc(namhoc)" +
                     ")";
             mydata.execSQL(diem);
             // nhập thử 1 giáo viên
-            String nhapgv = "INSERT INTO giaoVien VALUES (" +
+            String nhapgv = "INSERT INTO giaovien VALUES (" +
                     "null," +
                     "'Phan Hiếu Nghĩa'," +
                     "'nghia'," +

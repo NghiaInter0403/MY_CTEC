@@ -47,22 +47,22 @@
 
     <EditText
         android:id="@+id/edt_ten"
-        android:layout_width="315dp"
-        android:layout_height="52dp"
+        android:layout_width="260dp"
+        android:layout_height="64dp"
         android:ems="10"
         android:hint="Nhập tên đăng nhập"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintVertical_bias="0.361" />
 
     <EditText
         android:id="@+id/edt_mk"
-        android:layout_width="306dp"
-        android:layout_height="44dp"
+        android:layout_width="265dp"
+        android:layout_height="54dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="54dp"
         android:ems="10"
@@ -70,38 +70,38 @@
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintVertical_bias="0.415" />
 
     <Button
         android:id="@+id/btn_dn"
-        android:layout_width="307dp"
-        android:layout_height="54dp"
+        android:layout_width="140dp"
+        android:layout_height="58dp"
         android:backgroundTint="#4CAF50"
         android:text="Đăng nhập"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintVertical_bias="0.638" />
 
     <Button
         android:id="@+id/btn_thoat"
-        android:layout_width="307dp"
-        android:layout_height="54dp"
+        android:layout_width="130dp"
+        android:layout_height="56dp"
         android:backgroundTint="#FF5722"
         android:text="Thoát"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.667" />
+        app:layout_constraintVertical_bias="0.636" />
 </androidx.constraintlayout.widget.ConstraintLayout>
