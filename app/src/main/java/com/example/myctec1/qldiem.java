@@ -206,11 +206,11 @@ private void loadDiemSinhVien(String masv, String namhoc) {
         String dtb = c.getString(4);
 
         dsDiem.add(
-                "Môn: " + mamon +
-                        "\nĐiểm 1: " + d1 +
-                        " | Điểm 2: " + d2 +
-                        " | Điểm 3: " + d3 +
-                        "\nĐiểm TB: " + dtb
+                mamon + " - " +
+                        d1 + " - " +
+                        d2 + " - " +
+                        d3 + " - " +
+                        dtb
         );
     }
 
@@ -429,12 +429,102 @@ private void loadDiemSinhVien(String masv, String namhoc) {
             }
         });
         // nhấn lên list view hiển thị thêm thông tin
+        lv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String dong = dsDiem.get(position);
+
+                // tách dữ liệu
+                String[] data = dong.split(" - ");
+
+                String mamon = data[0];
+                String d1 = data[1];
+                String d2 = data[2];
+                String d3 = data[3];
+                String dtb = data[4];
+
+                // đổ lên EditText
+                edt_diem1.setText(d1);
+                edt_diem2.setText(d2);
+                edt_diem3.setText(d3);
+                tv_dtb.setText(dtb);
+
+                // set Spinner môn
+                int indexMon = maMonList.indexOf(mamon);
+                if (indexMon != -1) {
+                    cbb_dmon.setSelection(indexMon);
+                }
+
+                Toast.makeText(qldiem.this,
+                        "Đã chọn để chỉnh sửa",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // cập nhật điểm
         btn_dsua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+// Lấy mã từ Spinner
+                String masv = maSvList.get(cbb_dsv.getSelectedItemPosition());
+                String mamon = maMonList.get(cbb_dmon.getSelectedItemPosition());
+                String namhoc = cbb_dnam.getSelectedItem().toString();
 
+                // Lấy điểm từ EditText
+                String d1 = edt_diem1.getText().toString().trim();
+                String d2 = edt_diem2.getText().toString().trim();
+                String d3 = edt_diem3.getText().toString().trim();
+
+                if (d1.isEmpty() || d2.isEmpty() || d3.isEmpty()) {
+                    Toast.makeText(qldiem.this,
+                            "Vui lòng nhập đầy đủ điểm!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+
+                    double diem1 = Double.parseDouble(d1);
+                    double diem2 = Double.parseDouble(d2);
+                    double diem3 = Double.parseDouble(d3);
+
+                    double dtbValue = (diem1 + diem2 + (diem3 * 2)) / 4;
+
+                    ContentValues values = new ContentValues();
+                    values.put("diem_1", diem1);
+                    values.put("diem_2", diem2);
+                    values.put("diem_3", diem3);
+                    values.put("diem_tb", dtbValue);
+
+                    int result = mydata.update(
+                            "diem",
+                            values,
+                            "masv = ? AND mamon = ? AND namhoc = ?",
+                            new String[]{masv, mamon, namhoc}
+                    );
+
+                    if (result > 0) {
+
+                        loadDiemSinhVien(masv, namhoc);
+
+                        Toast.makeText(qldiem.this,
+                                "Cập nhật thành công!",
+                                Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        Toast.makeText(qldiem.this,
+                                "Không tìm thấy dữ liệu để cập nhật!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(qldiem.this,
+                            "Điểm phải là số hợp lệ!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
