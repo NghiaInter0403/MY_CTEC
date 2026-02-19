@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             mydata.execSQL(monhoc);
             // bản diem
             String diem = "CREATE TABLE IF NOT EXISTS diem (" +
-                    "id_diem INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "masv TEXT ," +
                     "mamon TEXT ," +
                     "namhoc INTEGER NOT NULL," +
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     "diem_2 REAL," +
                     "diem_3 REAL," +
                     "diem_tb REAL,"+
-                    "UNIQUE (masv,mamon),"+
+                    "PRIMARY KEY (masv,mamon),"+
                     "FOREIGN KEY (masv) REFERENCES sinhvien(masv)," +
                     "FOREIGN KEY (mamon) REFERENCES monhoc(mamon)," +
                     "FOREIGN KEY (namhoc) REFERENCES monhoc(namhoc)" +

@@ -1,5 +1,6 @@
 package com.example.myctec1;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -186,6 +187,43 @@ private void tinhDiemTrungBinh() {
         tv_dtb.setText("");
     }
 }
+// load điểm sinh viên
+private void loadDiemSinhVien(String masv, String namhoc) {
+
+    dsDiem.clear();
+
+    Cursor c = mydata.rawQuery(
+            "SELECT mamon, diem_1, diem_2, diem_3, diem_tb " +
+                    "FROM diem WHERE masv = ? AND namhoc = ?",
+            new String[]{masv, namhoc});
+
+    while (c.moveToNext()) {
+
+        String mamon = c.getString(0);
+        String d1 = c.getString(1);
+        String d2 = c.getString(2);
+        String d3 = c.getString(3);
+        String dtb = c.getString(4);
+
+        dsDiem.add(
+                "Môn: " + mamon +
+                        "\nĐiểm 1: " + d1 +
+                        " | Điểm 2: " + d2 +
+                        " | Điểm 3: " + d3 +
+                        "\nĐiểm TB: " + dtb
+        );
+    }
+
+    c.close();
+
+    adapterDiem = new ArrayAdapter<>(
+            this,
+            android.R.layout.simple_list_item_1,
+            dsDiem
+    );
+
+    lv2.setAdapter(adapterDiem);
+}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,6 +307,23 @@ private void tinhDiemTrungBinh() {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+        // cbb sinh viên load điểm sinh viên đó
+        cbb_dsv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String masv = maSvList.get(position);
+
+                if (cbb_dnam.getSelectedItem() != null) {
+                    String namhoc = cbb_dnam.getSelectedItem().toString();
+                    loadDiemSinhVien(masv, namhoc);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
 // set các nút
         // nút trở về
         btn_dtrove.setOnClickListener(new View.OnClickListener() {
@@ -309,6 +364,74 @@ private void tinhDiemTrungBinh() {
 
         // nút lưu
         btn_dluu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            // gán giá trị cho biến
+                // Lấy mã từ Spinner (dùng list mã đã lưu)
+
+                String masv = maSvList.get(cbb_dsv.getSelectedItemPosition());
+                String mamon = maMonList.get(cbb_dmon.getSelectedItemPosition());
+                String namhoc = cbb_dnam.getSelectedItem().toString();
+
+                // Lấy điểm từ EditText
+                String d1 = edt_diem1.getText().toString().trim();
+                String d2 = edt_diem2.getText().toString().trim();
+                String d3 = edt_diem3.getText().toString().trim();
+
+                // Lấy điểm trung bình từ TextView
+                String dtb = tv_dtb.getText().toString().trim();
+
+                // Kiểm tra rỗng
+                if (d1.isEmpty() || d2.isEmpty() || d3.isEmpty()) {
+                    Toast.makeText(qldiem.this,
+                            "Vui lòng nhập đầy đủ điểm!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+
+                    double diem1 = Double.parseDouble(d1);
+                    double diem2 = Double.parseDouble(d2);
+                    double diem3 = Double.parseDouble(d3);
+
+                    double dtbValue = (diem1 + diem2 + (diem3 * 2)) / 4;
+
+                    ContentValues values = new ContentValues();
+                    values.put("masv", masv);
+                    values.put("mamon", mamon);
+                    values.put("namhoc", namhoc);
+                    values.put("diem_1", diem1);
+                    values.put("diem_2", diem2);
+                    values.put("diem_3", diem3);
+                    values.put("diem_tb", dtbValue);
+
+                    long result = mydata.insert("diem", null, values);
+
+                    if (result == -1) {
+                        Toast.makeText(qldiem.this,
+                                "Điểm đã tồn tại!",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        loadDiemSinhVien(masv, namhoc);
+                        Toast.makeText(qldiem.this,
+                                "Lưu thành công!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (NumberFormatException e) {
+
+                    Toast.makeText(qldiem.this,
+                            "Điểm phải là số hợp lệ!",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        // nhấn lên list view hiển thị thêm thông tin
+
+        // cập nhật điểm
+        btn_dsua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
