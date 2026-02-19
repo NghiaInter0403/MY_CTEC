@@ -527,5 +527,53 @@ private void loadDiemSinhVien(String masv, String namhoc) {
                 }
             }
         });
+        btn_dxoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String masv = maSvList.get(cbb_dsv.getSelectedItemPosition());
+                String mamon = maMonList.get(cbb_dmon.getSelectedItemPosition());
+                String namhoc = cbb_dnam.getSelectedItem().toString();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(qldiem.this);
+                builder.setTitle("XÓA ĐIỂM");
+                builder.setMessage("Bạn có chắc muốn xóa điểm môn này không?");
+
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        int result = mydata.delete(
+                                "diem",
+                                "masv = ? AND mamon = ? AND namhoc = ?",
+                                new String[]{masv, mamon, namhoc}
+                        );
+
+                        if (result > 0) {
+
+                            loadDiemSinhVien(masv, namhoc);
+
+                            edt_diem1.setText("");
+                            edt_diem2.setText("");
+                            edt_diem3.setText("");
+                            tv_dtb.setText("");
+
+                            Toast.makeText(qldiem.this,
+                                    "Xóa thành công!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Toast.makeText(qldiem.this,
+                                    "Không tìm thấy dữ liệu để xóa!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton("Không", null);
+                builder.show();
+            }
+        });
+
     }
 }
