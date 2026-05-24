@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class trangchu extends AppCompatActivity {
 // khai báo biến
-    Button btn_ql,btn_tk,btn_thoat,btn_mon,btn_diem;
+    Button btn_ql,btn_thoat,btn_mon,btn_diem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,7 @@ public class trangchu extends AppCompatActivity {
         });
         // gắn id
         btn_ql=findViewById(R.id.btn_ql);
-        btn_tk=findViewById(R.id.btn_tk);
+
         btn_thoat=findViewById(R.id.btn_thoat);
         btn_mon = findViewById(R.id.btn_mon);
         btn_diem = findViewById(R.id.btn_diem);
@@ -73,14 +73,7 @@ public class trangchu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // nút thống kê
-        btn_tk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(trangchu.this, thongke.class);
-                startActivity(intent);
-            }
-        });
+
         // nút khác
        btn_ql.setOnClickListener(new View.OnClickListener() {
            @Override

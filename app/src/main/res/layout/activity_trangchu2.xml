@@ -50,23 +50,6 @@
         app:layout_constraintVertical_bias="0.281" />
 
     <Button
-        android:id="@+id/btn_tk"
-        android:layout_width="329dp"
-        android:layout_height="72dp"
-        android:backgroundTint="#2196F3"
-        android:text="xem thống kê"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:icon="?attr/actionModeSelectAllDrawable"
-        app:iconSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
-
-    <Button
         android:id="@+id/btn_mon"
         android:layout_width="330dp"
         android:layout_height="76dp"
